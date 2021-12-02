@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<style>
+    .row {
+        text-align: center;
+        vertical-align: center;
+        line-height: 30px;
+    }
+</style>
+<head>
+    <meta charset="UTF-8">
+    <title>Batleships</title>
+    <link th:href="@{/css/style.css}" rel="stylesheet"/>
+</head>
+<body class="body">
+<div class="gameTitle">Battleships</div>
+<div class="battleships-board">
+    <table class="battleships-board-grid">
+        <tbody>r
+        <tr class="row" th:include="boardGame.html :: boardRow(${game}, 0)"></tr>
+        <tr class="row" th:include="boardGame.html :: boardRow(${game}, 1)"></tr>
+        <tr class="row" th:include="boardGame.html :: boardRow(${game}, 2)"></tr>
+        <tr class="row" th:include="boardGame.html :: boardRow(${game}, 3)"></tr>
+        <tr class="row" th:include="boardGame.html :: boardRow(${game}, 4)"></tr>
+        <tr class="row" th:include="boardGame.html :: boardRow(${game}, 5)"></tr>
+        <tr class="row" th:include="boardGame.html :: boardRow(${game}, 6)"></tr>
+        <tr class="row" th:include="boardGame.html :: boardRow(${game}, 7)"></tr>
+        <tr class="row" th:include="boardGame.html :: boardRow(${game}, 8)"></tr>
+        <tr class="row" th:include="boardGame.html :: boardRow(${game}, 9)"></tr>
+
+
+        <!--                <div class="boad-area-content" data-x="0" data-y="0" onclick="checkHit(data-x, data-y)">-->
+        <!--                  <span class="area-value" > </span>-->
+        <!--                </div>-->
+        <!--            </td>-->
+        <!--            <td class="board-area-empty">-->
+        <!--                <div class="boad-area-content" data-x="0" data-y="1">-->
+        <!--&lt;!&ndash;                    <p th:text="${areavalue}/">&ndash;&gt;-->
+        <!--                </div>-->
+        <!--            </td>-->
+        <!--            <td class="board-area-empty">-->
+        <!--                <div class="boad-area-content" data-x="0" data-y="2">-->
+        <!--                    <span></span>-->
+        <!--                </div>-->
+        <!--            </td>-->
+        <!--            <td class="board-area-empty">-->
+        <!--                <div class="boad-area-content" data-x="0" data-y="3">-->
+        <!--                    <span></span>-->
+        <!--                </div>-->
+        <!--            </td>            <td class="board-area-empty">-->
+        <!--            <div class="boad-area-content" data-x="0" data-y="4">-->
+        <!--                <span></span>-->
+        <!--            </div>-->
+        <!--        </td>            <td class="board-area-empty">-->
+        <!--            <div class="boad-area-content" data-x="0" data-y="5">-->
+        <!--                <span></span>-->
+        <!--            </div>-->
+        <!--        </td>            <td class="board-area-empty">-->
+        <!--            <div class="boad-area-content" data-x="0" data-y="6">-->
+        <!--                <span></span>-->
+        <!--            </div>-->
+        <!--        </td>            <td class="board-area-empty">-->
+        <!--            <div class="boad-area-content" data-x="0" data-y="7">-->
+        <!--                <span></span>-->
+        <!--            </div>-->
+        <!--        </td>            <td class="board-area-empty">-->
+        <!--            <div class="boad-area-content" data-x="0" data-y="8">-->
+        <!--                <span></span>-->
+        <!--            </div>-->
+        <!--        </td>            <td class="board-area-empty">-->
+        <!--            <div class="boad-area-content" data-x="0" data-y="9">-->
+        <!--                <span></span>-->
+        <!--            </div>-->
+
+
+        </tbody>
+    </table>
+</div>
+
+
+<script pe="text/javascript" th:inline="javascript">
+    function checkHit(x, y) {
+        // var text = document.getElementsByClassName(area - value);
+
+    }
+</script>
+
+</body>
+</html>
+
+

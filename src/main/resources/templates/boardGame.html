@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+</head>
+<body>
+<div th:fragment="boardRow(game, rowNumber)">
+  <td><div class="boad-area-content" th:text="${game.getAreaValue(0, rowNumber)}"></div></td>
+  <td><div class="boad-area-content" th:text="${game.getAreaValue(1, rowNumber)}"></div></td>
+  <td><div class="boad-area-content" th:text="${game.getAreaValue(2, rowNumber)}"></div></td>
+  <td><div class="boad-area-content" th:text="${game.getAreaValue(3, rowNumber)}"></div></td>
+  <td><div class="boad-area-content" th:text="${game.getAreaValue(4, rowNumber)}"></div></td>
+  <td><div class="boad-area-content" th:text="${game.getAreaValue(5, rowNumber)}"></div></td>
+  <td><div class="boad-area-content" th:text="${game.getAreaValue(6, rowNumber)}"></div></td>
+  <td><div class="boad-area-content" th:text="${game.getAreaValue(7, rowNumber)}"></div></td>
+  <td><div class="boad-area-content" th:text="${game.getAreaValue(8, rowNumber)}"></div></td>
+  <td><div class="boad-area-content" style="margin: auto" th:text="${game.getAreaValue(9, rowNumber)}"></div></td>
+</div>
+</body>
+</html>

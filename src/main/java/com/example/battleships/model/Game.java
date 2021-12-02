@@ -4,62 +4,82 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
 
 
-@AllArgsConstructor
-@NoArgsConstructor
+
 @Getter
 @Setter
+@Component
+
+
 public class Game {
-    private GameBoard gameBoard = new GameBoard();
-    private int[][] gamePlay  = gameBoard.createNewGameBoard();
-    private boolean gameEnd;
-    private final int ASCII_CODE_FOR_A = 65;
-    private final int ASCII_CODE_FOR_ONE = 49;
+    private GameBoard gameBoard;
+    private int[][] gamePlay;
+    private boolean gameEnd = false;
+//    private final int ASCII_CODE_FOR_A = 65;
+//    private final int ASCII_CODE_FOR_ONE = 49;
 
 
-    public void checkIfShipIsHited(String coordinates) {
-        int x = getXCoordinate(coordinates);
-        int y = getYCoordinates(coordinates);
+    public Game(GameBoard gameBoard) {
+        this.gameBoard = gameBoard;
+    }
+
+    public void startNewGame () {
+        gamePlay = gameBoard.createNewGameBoard();
+    }
+
+    public String getAreaValue (int x, int y) {
+        return String.valueOf(gamePlay[x][y]);
+    }
+
+    public int[] getRow (int x) {
+        return gamePlay[x];
+    }
+
+    public boolean isShipHitted( int x, int y) {
+//        int x = getXCoordinate(coordinates);
+//        int y = getYCoordinates(coordinates);
         switch (gamePlay[x][y]) {
             case 0:
                 gamePlay[x][y] = AreaStatus.MISS.value;
                 System.out.println("You misse. Try again :)");
-                break;
+                return false;
             case 1:
                 gamePlay[x][y] = AreaStatus.HITTED_FIRST_SHIP.value;
                 checkIfShipIsSunken(1);
                 System.out.println("You hited. Congratz :D");
-                break;
+                return true;
             case 2:
                 gamePlay[x][y] = AreaStatus.HITTED_SECOND_SHIP.value;
                 checkIfShipIsSunken(2);
                 System.out.println("You hited. Congratz :D");
-                break;
+                return true;
             case 3:
                 gamePlay[x][y] = AreaStatus.HITTED_THIRD_SHIP.value;
                 checkIfShipIsSunken(3);
                 System.out.println("You hited. Congratz :D");
-                break;
+                return true;
             default:
                 System.out.println("You already shot this place");
         }
+        return false;
     }
 
-    private int getXCoordinate (String coordinates) {
-        return (int) coordinates.charAt(0) - ASCII_CODE_FOR_A;
-    }
-
-    private int getYCoordinates (String coordinates) {
-        if (coordinates.length() == 2) {
-            return (int) coordinates.charAt(1) - ASCII_CODE_FOR_ONE;
-        } else {
-            return 9;
-        }
-    }
+//    private int getXCoordinate (String coordinates) {
+//        return (int) coordinates.charAt(0) - ASCII_CODE_FOR_A;
+//    }
+//
+//    private int getYCoordinates (String coordinates) {
+//        if (coordinates.length() == 2) {
+//            return (int) coordinates.charAt(1) - ASCII_CODE_FOR_ONE;
+//        } else {
+//            return 9;
+//        }
+//    }
 
     private void checkIfShipIsSunken (int shipNumber) {
         boolean anyMatch = false;

@@ -10,6 +10,7 @@ import java.util.Random;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
+@Component
 public class GameBoard {
     private final int ROWS = 10;
     private final int COLUMNS = 10;
@@ -18,9 +19,9 @@ public class GameBoard {
 
 
     public int[][] createNewGameBoard() {
-        locateShip(1,4);
-        locateShip(2,4);
-        locateShip(3,5);
+        locateShip(AreaStatus.FIRST_SHIP.value, 4);
+        locateShip(AreaStatus.SECOND_SHIP.value, 4);
+        locateShip(AreaStatus.THIRD_SHIP.value, 5);
         return gameBoard;
     }
 
