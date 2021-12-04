@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+<!--This css is here becouse becouse it didnt'w want to work from file-->
 <style>
     .row {
         text-align: center;
@@ -11,80 +12,60 @@
     <meta charset="UTF-8">
     <title>Batleships</title>
     <link th:href="@{/css/style.css}" rel="stylesheet"/>
+    <script src="jquery-3.5.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
 </head>
 <body class="body">
 <div class="gameTitle">Battleships</div>
 <div class="battleships-board">
-    <table class="battleships-board-grid">
-        <tbody>r
-        <tr class="row" th:include="boardGame.html :: boardRow(${game}, 0)"></tr>
-        <tr class="row" th:include="boardGame.html :: boardRow(${game}, 1)"></tr>
-        <tr class="row" th:include="boardGame.html :: boardRow(${game}, 2)"></tr>
-        <tr class="row" th:include="boardGame.html :: boardRow(${game}, 3)"></tr>
-        <tr class="row" th:include="boardGame.html :: boardRow(${game}, 4)"></tr>
-        <tr class="row" th:include="boardGame.html :: boardRow(${game}, 5)"></tr>
-        <tr class="row" th:include="boardGame.html :: boardRow(${game}, 6)"></tr>
-        <tr class="row" th:include="boardGame.html :: boardRow(${game}, 7)"></tr>
-        <tr class="row" th:include="boardGame.html :: boardRow(${game}, 8)"></tr>
-        <tr class="row" th:include="boardGame.html :: boardRow(${game}, 9)"></tr>
-
-
-        <!--                <div class="boad-area-content" data-x="0" data-y="0" onclick="checkHit(data-x, data-y)">-->
-        <!--                  <span class="area-value" > </span>-->
-        <!--                </div>-->
-        <!--            </td>-->
-        <!--            <td class="board-area-empty">-->
-        <!--                <div class="boad-area-content" data-x="0" data-y="1">-->
-        <!--&lt;!&ndash;                    <p th:text="${areavalue}/">&ndash;&gt;-->
-        <!--                </div>-->
-        <!--            </td>-->
-        <!--            <td class="board-area-empty">-->
-        <!--                <div class="boad-area-content" data-x="0" data-y="2">-->
-        <!--                    <span></span>-->
-        <!--                </div>-->
-        <!--            </td>-->
-        <!--            <td class="board-area-empty">-->
-        <!--                <div class="boad-area-content" data-x="0" data-y="3">-->
-        <!--                    <span></span>-->
-        <!--                </div>-->
-        <!--            </td>            <td class="board-area-empty">-->
-        <!--            <div class="boad-area-content" data-x="0" data-y="4">-->
-        <!--                <span></span>-->
-        <!--            </div>-->
-        <!--        </td>            <td class="board-area-empty">-->
-        <!--            <div class="boad-area-content" data-x="0" data-y="5">-->
-        <!--                <span></span>-->
-        <!--            </div>-->
-        <!--        </td>            <td class="board-area-empty">-->
-        <!--            <div class="boad-area-content" data-x="0" data-y="6">-->
-        <!--                <span></span>-->
-        <!--            </div>-->
-        <!--        </td>            <td class="board-area-empty">-->
-        <!--            <div class="boad-area-content" data-x="0" data-y="7">-->
-        <!--                <span></span>-->
-        <!--            </div>-->
-        <!--        </td>            <td class="board-area-empty">-->
-        <!--            <div class="boad-area-content" data-x="0" data-y="8">-->
-        <!--                <span></span>-->
-        <!--            </div>-->
-        <!--        </td>            <td class="board-area-empty">-->
-        <!--            <div class="boad-area-content" data-x="0" data-y="9">-->
-        <!--                <span></span>-->
-        <!--            </div>-->
-
-
+    <div class="rules-box">Hello there! This is a simple battleships game. On the board below there are 3 ships hidden.
+        One consists of 5 squares in line, and two consist of 4 swquares inline. They can touch each other.
+        You need to find all of them. Just click on any place on the board and see if you hit.Good luck!!
+    </div>
+    <div class="communicate-box" th:text="${game.communicate}"></div>
+    <table id="boardTable" class="battleships-board-grid">
+        <tbody>
+        <tr class="row" th:include="/fragments/boardGame.html :: boardRow(${game}, 0)"></tr>
+        <tr class="row" th:include="/fragments/boardGame.html :: boardRow(${game}, 1)"></tr>
+        <tr class="row" th:include="/fragments/boardGame.html :: boardRow(${game}, 2)"></tr>
+        <tr class="row" th:include="/fragments/boardGame.html :: boardRow(${game}, 3)"></tr>
+        <tr class="row" th:include="/fragments/boardGame.html :: boardRow(${game}, 4)"></tr>
+        <tr class="row" th:include="/fragments/boardGame.html :: boardRow(${game}, 5)"></tr>
+        <tr class="row" th:include="/fragments/boardGame.html :: boardRow(${game}, 6)"></tr>
+        <tr class="row" th:include="/fragments/boardGame.html :: boardRow(${game}, 7)"></tr>
+        <tr class="row" th:include="/fragments/boardGame.html :: boardRow(${game}, 8)"></tr>
+        <tr class="row" th:include="/fragments/boardGame.html :: boardRow(${game}, 9)"></tr>
         </tbody>
     </table>
 </div>
-
-
 <script pe="text/javascript" th:inline="javascript">
-    function checkHit(x, y) {
-        // var text = document.getElementsByClassName(area - value);
+    var gameEnd = [[${game.gameEnd}]];
 
+    function checkGameEnd() {
+        if (gameEnd === true) {
+            window.location = "/end";
+        }
     }
-</script>
 
+    function checkHit(row, column) {
+        let p1 = new Promise(
+            (resolve => {
+                makeHitRequest(row, column);
+            })
+        );
+        p1
+            .then(checkGameEnd)
+            .then(window.location.reload());
+    }
+
+    function makeHitRequest(row, column) {
+        let xhr = new XMLHttpRequest();
+        xhr.open('PUT', '/hit/?row=' + row + '&column=' + column);
+        xhr.send();
+    }
+
+</script>
 </body>
 </html>
 

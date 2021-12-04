@@ -1,5 +1,4 @@
 .body {
-    background-image:url("/static/images/SeaBackground.jpg");
     background-color: cadetblue;
 }
 
@@ -23,5 +22,30 @@
     vertical-align: center;
 }
 
+.communicate-box {
+    position: center;
+    text-align: center;
+    font-size: 30px;
+    padding-top: 30px;
+    padding-bottom: 25px;
+    color: white;
+}
 
+.rules-box {
+    color: white;
+    font-size: 15px;
+    padding-top: 30px;
+}
 
+.game-end {
+    position: center;
+    text-align: center;
+    font-size: 50px;
+    padding-top: 30px;
+    padding-bottom: 25px;
+    color: white;
+}
+
+.button {
+    position: center;
+}

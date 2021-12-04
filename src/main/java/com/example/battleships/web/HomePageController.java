@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-@RequestMapping ("/")
+@RequestMapping("/")
 @AllArgsConstructor
 @Getter
 
@@ -18,17 +18,8 @@ public class HomePageController {
     private final Game game;
 
 
-//    @GetMapping("/")
-//    public String displayHomePage() {
-////        ModelAndView mav = new ModelAndView("home");
-//        if (game.getGamePlay() == null) {
-//            game.startNewGame();
-//        }
-//        return "home";
-//    }
-
     @GetMapping("/")
-    public ModelAndView displayAreaStatus () {
+    public ModelAndView displayGamePage() {
         if (game.getGamePlay() == null) {
             game.startNewGame();
         }
@@ -37,13 +28,24 @@ public class HomePageController {
         return maw;
     }
 
-//    @PostMapping("/")
-//    public String getAreaValue(@RequestParam int x, @RequestParam int y) {
-//        return game.getAreaValue(x,y);
-//    }
-
-    @PostMapping ("/")
-    public boolean checkHit(int x, int y) {
-        return game.isShipHitted(x, y);
+    @PutMapping("/hit/")
+    public ModelAndView checkHit(@RequestParam(name = "row") Integer row, @RequestParam(name = "column") Integer column) {
+        ModelAndView maw = new ModelAndView("home");
+        maw.addObject("game", game);
+        game.isShipHitted(row, column);
+        return maw;
     }
-}
+
+    @GetMapping("/end")
+    public String displayGameEndPage() {
+        return "gameOver";
+    }
+
+    @GetMapping("/new")
+        public String loadNewGame () {
+            game.startNewGame();
+            return "home";
+        }
+    }
+
+

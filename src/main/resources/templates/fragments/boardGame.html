@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+</head>
+<body>
+<div th:fragment="boardRow(game, rowNumber)">
+  <div > </div>
+  <td th:attr="onclick=|checkHit(0,'${rowNumber}')|"><div class="boad-area-content" th:text="${game.getAreaValue(0, rowNumber)}"></div></td>
+  <td th:attr="onclick=|checkHit(1,'${rowNumber}')|"><div class="boad-area-content" th:text="${game.getAreaValue(1, rowNumber)}"></div></td>
+  <td th:attr="onclick=|checkHit(2,'${rowNumber}')|"><div class="boad-area-content" th:text="${game.getAreaValue(2, rowNumber)}"></div></td>
+  <td th:attr="onclick=|checkHit(3,'${rowNumber}')|"><div class="boad-area-content" th:text="${game.getAreaValue(3, rowNumber)}"></div></td>
+  <td th:attr="onclick=|checkHit(4,'${rowNumber}')|"><div class="boad-area-content" th:text="${game.getAreaValue(4, rowNumber)}"></div></td>
+  <td th:attr="onclick=|checkHit(5,'${rowNumber}')|"><div class="boad-area-content" th:text="${game.getAreaValue(5, rowNumber)}"></div></td>
+  <td th:attr="onclick=|checkHit(6,'${rowNumber}')|"><div class="boad-area-content" th:text="${game.getAreaValue(6, rowNumber)}"></div></td>
+  <td th:attr="onclick=|checkHit(7,'${rowNumber}')|"><div class="boad-area-content" th:text="${game.getAreaValue(7, rowNumber)}"></div></td>
+  <td th:attr="onclick=|checkHit(8,'${rowNumber}')|"><div class="boad-area-content" th:text="${game.getAreaValue(8, rowNumber)}"></div></td>
+  <td th:attr="onclick=|checkHit(9,'${rowNumber}')|"><div class="boad-area-content" th:text="${game.getAreaValue(9, rowNumber)}"></div></td>
+</div>
+</body>
+</html>
