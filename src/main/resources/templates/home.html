@@ -49,14 +49,17 @@
     }
 
     function checkHit(row, column) {
-        let p1 = new Promise(
-            (resolve => {
-                makeHitRequest(row, column);
-            })
-        );
+        const p1 = new Promise((resolve, reject) => {
+            makeHitRequest(row, column);
+            resolve('Success!');
+        });
         p1
-            .then(checkGameEnd)
-            .then(window.location.reload());
+        .then(setTimeout(function () {
+            checkGameEnd();
+        }, 400))
+        .then(setTimeout(function () {
+            window.location.reload();
+        }, 500));
     }
 
     function makeHitRequest(row, column) {

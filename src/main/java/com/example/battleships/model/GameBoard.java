@@ -19,6 +19,7 @@ public class GameBoard {
 
 
     public int[][] createNewGameBoard() {
+        gameBoard  = new int[ROWS][COLUMNS];
         locateShip(AreaStatus.FIRST_SHIP.value, 4);
         locateShip(AreaStatus.SECOND_SHIP.value, 4);
         locateShip(AreaStatus.THIRD_SHIP.value, 5);

@@ -50,18 +50,18 @@ public class Game {
                 return false;
             case 1:
                 gamePlay[x][y] = AreaStatus.HITTED_FIRST_SHIP.value;
-                checkIfShipIsSunken(1);
                 communicate = "You hit. Congratz :D";
+                checkIfShipIsSunken(1);
                 return true;
             case 2:
                 gamePlay[x][y] = AreaStatus.HITTED_SECOND_SHIP.value;
-                checkIfShipIsSunken(2);
                 communicate = "You hit. Congratz :D";
+                checkIfShipIsSunken(2);
                 return true;
             case 3:
                 gamePlay[x][y] = AreaStatus.HITTED_THIRD_SHIP.value;
-                checkIfShipIsSunken(3);
                 communicate = "You hit. Congratz :D";
+                checkIfShipIsSunken(3);
                 return true;
             default:
                 communicate = "You already shot this place";
@@ -70,6 +70,7 @@ public class Game {
     }
 
     private void checkIfShipIsSunken(int shipNumber) {
+        System.out.println("im triggered");
         int matching = 0;
         for (int[] row : gamePlay) {
             for (int number : row) {
@@ -78,9 +79,11 @@ public class Game {
                 }
             }
         }
+        System.out.println(matching);
 
         if (matching == 0) {
-            communicate = ("Ship destroyed. You're awsome!!");
+            communicate = ("Ship destroyed. You're awesome!!");
+            System.out.println("if triggered");
             isGameOver();
         }
     }
@@ -90,15 +93,15 @@ public class Game {
         for (int[] row : gamePlay) {
             for (int number : row) {
                 if (number > 0 && number <= gameBoard.getNUMBER_OF_SHIPS()) {
-                    System.out.println(gameEnd);
                     matching++;
                 }
             }
         }
+        System.out.println("gameEnd:" + gameEnd);
         if (matching == 0) {
             gameEnd = true;
+            System.out.println("gameEnd:" + gameEnd);
         }
-
     }
 }
 

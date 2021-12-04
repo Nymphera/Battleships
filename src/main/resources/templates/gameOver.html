@@ -13,9 +13,11 @@
 <script pe="text/javascript" th:inline="javascript">
     function loadNewGame() {
         let xhr = new XMLHttpRequest();
-        xhr.open('GET', '/new)');
+        xhr.open('GET', '/new');
         xhr.send();
-        location = "/";
+        setTimeout(function () {
+            location = "/";
+        }, 500)
     }
 </script>
 </body>

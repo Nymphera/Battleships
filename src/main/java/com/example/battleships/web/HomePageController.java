@@ -28,7 +28,7 @@ public class HomePageController {
         return maw;
     }
 
-    @PutMapping("/hit/")
+    @PutMapping("/hit")
     public ModelAndView checkHit(@RequestParam(name = "row") Integer row, @RequestParam(name = "column") Integer column) {
         ModelAndView maw = new ModelAndView("home");
         maw.addObject("game", game);
@@ -42,9 +42,12 @@ public class HomePageController {
     }
 
     @GetMapping("/new")
-        public String loadNewGame () {
-            game.startNewGame();
-            return "home";
+        public ModelAndView loadNewGame () {
+        System.out.println("controller");
+        ModelAndView maw = new ModelAndView("gameOver");
+        maw.addObject("game", game);
+        game.startNewGame();
+        return maw;
         }
     }
 
