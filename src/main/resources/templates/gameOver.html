@@ -12,12 +12,13 @@
 <button class="button" onclick="loadNewGame()"> New game</button>
 <script pe="text/javascript" th:inline="javascript">
     function loadNewGame() {
-        let xhr = new XMLHttpRequest();
-        xhr.open('GET', '/new');
-        xhr.send();
-        setTimeout(function () {
+        new Promise((resolve, reject) => {
+            let xhr = new XMLHttpRequest();
+            xhr.open('PUT', '/new');
+            xhr.send();
+        }).then(setTimeout(function () {
             location = "/";
-        }, 500)
+        }, 500));
     }
 </script>
 </body>

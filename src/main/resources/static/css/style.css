@@ -48,4 +48,9 @@
 
 .button {
     position: center;
+    margin: auto;
+}
+
+.left-header, header {
+    font-size: 10px;
 }

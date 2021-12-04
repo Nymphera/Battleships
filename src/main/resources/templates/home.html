@@ -25,6 +25,19 @@
     </div>
     <div class="communicate-box" th:text="${game.communicate}"></div>
     <table id="boardTable" class="battleships-board-grid">
+        <thead>
+        <th></th>
+        <th class="header">A</th>
+        <th class="header">B</th>
+        <th class="header">C</th>
+        <th class="header">D</th>
+        <th class="header">E</th>
+        <th class="header">F</th>
+        <th class="header">G</th>
+        <th class="header">H</th>
+        <th class="header">I</th>
+        <th class="header">J</th>
+        </thead>
         <tbody>
         <tr class="row" th:include="/fragments/boardGame.html :: boardRow(${game}, 0)"></tr>
         <tr class="row" th:include="/fragments/boardGame.html :: boardRow(${game}, 1)"></tr>
@@ -48,18 +61,15 @@
         }
     }
 
+    checkGameEnd();
+
     function checkHit(row, column) {
-        const p1 = new Promise((resolve, reject) => {
+        new Promise((resolve, reject) => {
             makeHitRequest(row, column);
             resolve('Success!');
-        });
-        p1
-        .then(setTimeout(function () {
-            checkGameEnd();
-        }, 400))
-        .then(setTimeout(function () {
+        }).then(setTimeout(function () {
             window.location.reload();
-        }, 500));
+        }, 50));
     }
 
     function makeHitRequest(row, column) {

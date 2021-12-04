@@ -32,7 +32,7 @@ public class HomePageController {
     public ModelAndView checkHit(@RequestParam(name = "row") Integer row, @RequestParam(name = "column") Integer column) {
         ModelAndView maw = new ModelAndView("home");
         maw.addObject("game", game);
-        game.isShipHitted(row, column);
+        game.checkHit(row, column);
         return maw;
     }
 
@@ -41,9 +41,8 @@ public class HomePageController {
         return "gameOver";
     }
 
-    @GetMapping("/new")
+    @PutMapping("/new")
         public ModelAndView loadNewGame () {
-        System.out.println("controller");
         ModelAndView maw = new ModelAndView("gameOver");
         maw.addObject("game", game);
         game.startNewGame();
