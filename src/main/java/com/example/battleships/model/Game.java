@@ -41,31 +41,18 @@ public class Game {
         }
     }
 
-    public boolean checkHit(int x, int y) {
-        switch (gamePlay[x][y]) {
-            case 0:
-                gamePlay[x][y] = AreaStatus.MISS.value;
-                communicate = "You miss. Try again :)";
-                return false;
-            case 1:
-                gamePlay[x][y] = AreaStatus.HITED.value;
-                communicate = "You hit. Congratz :D";
-                checkSunk(1);
-                return true;
-            case 2:
-                gamePlay[x][y] = AreaStatus.HITED.value;
-                communicate = "You hit. Congratz :D";
-                checkSunk(2);
-                return true;
-            case 3:
-                gamePlay[x][y] = AreaStatus.HITED.value;
-                communicate = "You hit. Congratz :D";
-                checkSunk(3);
-                return true;
-            default:
-                communicate = "You already shot this place";
+    public void checkHit(int x, int y) {
+        int areaValue = gamePlay[x][y];
+        if (gamePlay[x][y] == 0) {
+            gamePlay[x][y] = AreaStatus.MISS.value;
+            communicate = "You miss. Try again :)";
+        } else if (gamePlay[x][y] >  0 && gamePlay[x][y] <= gameBoard.getNUMBER_OF_SHIPS()) {
+            gamePlay[x][y] = AreaStatus.HITED.value;
+            communicate = "You hit. Congratz :D";
+            checkSunk(areaValue);
+        } else  {
+            communicate = "You already shot this place";
         }
-        return false;
     }
 
     private void checkSunk(int shipNumber) {
